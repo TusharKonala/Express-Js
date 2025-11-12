@@ -1,3 +1,5 @@
+const startupDebugger = require("debug")("app:startup");
+const dbDebugger = require("debug")("app:db");
 const config = require("config");
 const logger = require("./logger");
 const authentication = require("./authentication");
@@ -21,8 +23,11 @@ console.log(`Env val from app.get: ${app.get("env")}`);
 
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
-  console.log("Morgan enabled...");
+  // console.log("Morgan enabled...");
+  startupDebugger("Morgan enabled");
 }
+
+dbDebugger("Connecting to the database...");
 
 //Configuration
 console.log("Application name: " + config.get("name"));
