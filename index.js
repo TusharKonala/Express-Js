@@ -18,6 +18,8 @@ app.use(express.static("public"));
 
 app.use(helmet());
 
+app.set("view engine", "pug");
+
 console.log(`Env value: ${process.env.NODE_ENV}`);
 console.log(`Env val from app.get: ${app.get("env")}`);
 
@@ -41,7 +43,10 @@ const courses = [
 ];
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.render("index", {
+    title: "My Express App",
+    message: "Hello",
+  });
 });
 
 app.get("/api/courses", (req, res) => {
